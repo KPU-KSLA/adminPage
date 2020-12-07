@@ -38,7 +38,7 @@ function Auth () {
     })
     return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
   }, [])
-  if (isSignedIn) {
+  if (!isSignedIn) {
     return (
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     )
