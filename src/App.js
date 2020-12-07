@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from 'firebase'
-const firebaseui = require('firebaseui')
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBWqJzzQnNENKkOVpsOhWlITGv-Um9Y_Hc',
@@ -16,7 +15,20 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
-const ui = new firebaseui.auth.AuthUI(firebase.auth())
+// Configure FirebaseUI.
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: 'popup',
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID
+  ],
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => false
+  }
+}
 
 function Auth () {
   const [isSignedIn, setIsSignedIn] = useState(false) // Local signed-in state.
@@ -26,9 +38,15 @@ function Auth () {
     })
     return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
   }, [])
-  return (
-    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-  )
+  if (isSignedIn) {
+    return (
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    )
+  } else {
+    return (
+      <Content />
+    )
+  }
 }
 
 function Content () {
