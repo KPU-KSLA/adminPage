@@ -17,6 +17,17 @@
     <script defer src="/__/firebase/8.1.2/firebase-analytics.js"></script>
     <script defer src="/__/firebase/8.1.2/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/8.1.2/firebase-performance.js"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+  crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin></script>
+
+<script>var Alert = ReactBootstrap.Alert;</script>
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -38,25 +49,10 @@
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.1.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.1.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-performance.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+     -->
   </head>
   <body>
+    <div id="root"></div>
+    <script src="../src/App.js"></script>
   </body>
 </html>
