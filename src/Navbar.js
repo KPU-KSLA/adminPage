@@ -40,7 +40,6 @@ function Navbar () {
             </ul>
             <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-
               <a className="nav-link" onClick={isSignedIn ? () => signOut() : () => setPage(Login)}>{ isSignedIn ? '로그아웃' : '로그인' }</a>
                 </li>
             </ul>
