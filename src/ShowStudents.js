@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
 import StudentAttendance from './StudentAttendance'
 import Jumbo from './Jumbo'
+import readStudents from './firebase/read/readStudents'
 
 function ShowStudents ({ lectureRoom, timeCount }) {
   const database = firebase.database()
-  const [values, setValues] = useState([])
+  const [checkedStudents, setCheckedStudents] = useState([])
 
   useEffect(() => {
-    async function getValues () {
+    async function getCheckedStudents () {
       const casesRef = database.ref('cases')
       const snapShot = await casesRef.once('value')
       const snapshotObjects = []
@@ -27,9 +28,9 @@ function ShowStudents ({ lectureRoom, timeCount }) {
         }
       })
       const result = await Promise.all(promises)
-      setValues(result)
+      setCheckedStudents(result)
     }
-    getValues()
+    getCheckedStudents()
   })
 
   const now = new Date(Date.now())
@@ -40,7 +41,7 @@ function ShowStudents ({ lectureRoom, timeCount }) {
     day: now.getDay()
   }
 
-  const mappedValues = values.map(obj => {
+  const mappedCheckedStudents = checkedStudents.map(obj => {
     const e = obj.props.children
     const dateString = e.date
     const date = new Date(dateString)
@@ -62,26 +63,37 @@ function ShowStudents ({ lectureRoom, timeCount }) {
     }
   })
 
-  const filtered = mappedValues.filter(e =>
+  const filtered = mappedCheckedStudents.filter(e =>
     e.year === today.year &&
         e.month === today.month &&
         e.day === today.day &&
         e.qrString === lectureRoom
   )
   const noOneRegistered = '아무도 출석하지 않았습니다!'
-  const children = filtered.length
+  const noOneExists = '출석부에 등록된 학생이 아무도 없습니다!'
+  const checkedComponents = filtered.length
     ? <div>
             {filtered.map(e => <StudentAttendance key={e.key} day={e.day} timeCount={e.timeCount} studentNumber={e.studentNumber} />)}
         </div>
     : <p className="h2 text-center">{noOneRegistered}</p>
-
-  return (
-        <div>
-            <Jumbo content={`${lectureRoom}호 ${timeCount}교시 강의`}></Jumbo>
-            <div>
-                {children}
-            </div>
+  const everyStudents = readStudents({ timeCount, lectureRoom })
+  const everyComponents = everyStudents.length
+    ? <div>
+            {everyStudents.map(e => <StudentAttendance key={e.studentNumber} day={today.day} timeCount={timeCount} studentNumber={e.studentNumber} />)}
         </div>
+    : <p className="h2 text-center">{noOneExists}</p>
+  return (
+      <div>
+          <Jumbo content={`${lectureRoom}호 ${timeCount}교시 강의`}></Jumbo>
+        <div>
+          <p className="h1 text-center">출석 학생</p>
+                  {checkedComponents}
+        </div>
+        <div>
+          <p className="h1 text-center">전체 학생</p>
+                  {everyComponents}
+        </div>
+      </div>
   )
 }
 
