@@ -1,24 +1,28 @@
-import React from 'react'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import PropTypes from 'prop-types'
-import firebase from 'firebase'
+import { createElement, useState } from 'react'
+import store from './redux/store'
 
-function Content ({ isSigned, setIsSigned, currentPage, uiConfig }) {
-  if (!isSigned) {
-    return (
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    )
-  } else {
-    return (
-      <currentPage />
-    )
+function Content ({ isSigned, setIsSigned, uiConfig }) {
+  const initialPage = store.getState().pageReducer.page
+  console.log(store.getState())
+  console.log('content uiconfig', uiConfig)
+  const elemProps = {
+    isSigned,
+    setIsSigned,
+    uiConfig
   }
+  const [currentPage, setCurrentPage] = useState(createElement(initialPage, elemProps))
+  store.subscribe(() => {
+    const page = store.getState().pageReducer.page
+    console.log('page: ', page)
+    setCurrentPage(createElement(page, elemProps))
+  })
+  return currentPage
 }
 
 Content.propTypes = {
   isSigned: PropTypes.bool,
   setIsSigned: PropTypes.func,
-  currentPage: PropTypes.elementType,
   uiConfig: PropTypes.uiConfig
 }
 
