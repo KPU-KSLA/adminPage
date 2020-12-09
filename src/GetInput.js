@@ -43,7 +43,8 @@ function GetInput ({ notSignedInText, jumboText, isSigned, callback }) {
 
   if (!isSubmitted) {
     return (
-    <div>
+      <div>
+        {renderedJumbo}
         <p className="h2 text-center">교시와 강의실 입력</p>
       <div action="" onKeyPress={(e) => {
         if (e.key !== 'Enter') {
