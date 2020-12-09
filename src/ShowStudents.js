@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
+import StudentAttendance from './StudentAttendance'
+import Jumbo from './Jumbo'
 
 function ShowStudents ({ lectureRoom, timeCount }) {
   const database = firebase.database()
