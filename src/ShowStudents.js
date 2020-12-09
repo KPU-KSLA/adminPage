@@ -89,3 +89,5 @@ ShowStudents.propTypes = {
   lectureRoom: PropTypes.string,
   timeCount: PropTypes.number
 }
+
+export default ShowStudents

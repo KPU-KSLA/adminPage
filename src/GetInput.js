@@ -2,9 +2,17 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Jumbo from './Jumbo'
 
-function GetInput ({ isSigned, callback }) {
-  const notSignedInText = '출석현황을 보기 위해서는 로그인해야 합니다.'
+function GetInput ({ notSignedInText, isSigned, callback }) {
   const renderedJumbo = <Jumbo content="KPU 출석현황 페이지"></Jumbo>
+  if (!isSigned) {
+    return (
+      <div>
+        {renderedJumbo}
+          <p className="text-center">{notSignedInText}</p>
+      </div>
+    )
+  }
+  const maxTimeCount = 24
 
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [timeCount, setTimeCount] = useState(0)
@@ -20,16 +28,6 @@ function GetInput ({ isSigned, callback }) {
       console.log(timeCount)
       setTimeCount(+e.target.value)
     }
-  }
-  const maxTimeCount = 24
-
-  if (!isSigned) {
-    return (
-    <div>
-      {renderedJumbo}
-        <p className="text-center">{notSignedInText}</p>
-    </div>
-    )
   }
 
   const submit = () => {
@@ -72,12 +70,18 @@ function GetInput ({ isSigned, callback }) {
     )
   }
 
-  callback()
+  const args = {
+    timeCount,
+    lectureRoom
+  }
+
+  return callback(args)
 }
 
 GetInput.propTypes = {
   isSigned: PropTypes.bool,
-  submit: PropTypes.func
+  submit: PropTypes.func,
+  notSignedInText: PropTypes.string
 }
 
 export default GetInput
