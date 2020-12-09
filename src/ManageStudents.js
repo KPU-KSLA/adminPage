@@ -1,15 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+import readLectureRooms from './firebase/read/readLectureRooms'
+import LectureRoom from './LectureRoom'
 
-function ManageStudents ({ timeCount, lectureRoom }) {
-  return (
-        <div></div>
-  )
-}
-
-ManageStudents.propTypes = {
-  timeCount: PropTypes.number,
-  lectureRoom: PropTypes.string
+function ManageStudents () {
+  const [lectureRooms, setLectureRooms] = useState([])
+  async function updateTimeCounts () {
+    const updated = await readLectureRooms()
+    setLectureRooms(updated)
+  }
+  updateTimeCounts()
+  const resultComponents = lectureRooms.map(lectureRoom =>
+    <div key={lectureRoom}>
+          <LectureRoom lectureRoom={lectureRoom}/>
+  </div>)
+  return resultComponents
 }
 
 export default ManageStudents

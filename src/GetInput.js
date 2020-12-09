@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Jumbo from './Jumbo'
 
-function GetInput ({ notSignedInText, jumboText, isSigned, callback }) {
+function GetInput ({ notSignedInText, jumboText, isSigned, callback, noInput }) {
   const renderedJumbo = <Jumbo content={jumboText}></Jumbo>
   if (!isSigned) {
     return (
@@ -12,6 +12,11 @@ function GetInput ({ notSignedInText, jumboText, isSigned, callback }) {
       </div>
     )
   }
+
+  if (noInput) {
+    return callback()
+  }
+
   const maxTimeCount = 24
 
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -83,7 +88,8 @@ GetInput.propTypes = {
   isSigned: PropTypes.bool,
   jumboText: PropTypes.string,
   submit: PropTypes.func,
-  notSignedInText: PropTypes.string
+  notSignedInText: PropTypes.string,
+  noInput: PropTypes.bool
 }
 
 export default GetInput
