@@ -6,9 +6,12 @@ async function readTimeCounts ({ lectureRoom }) {
     .ref('lectureRoom')
     .child(lectureRoom)
     .child('timeCount')
-  const values = await ref.once('value')
+  const snapshot = await ref.once('value')
+  const val = snapshot.val()
   const res = []
-  values.forEach(obj => res.push(obj.key))
+  for (const key in val) {
+    res.push(key)
+  }
   return res
 }
 

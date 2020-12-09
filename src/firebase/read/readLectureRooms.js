@@ -5,9 +5,12 @@ async function readLectureRooms () {
   const ref = database
     .ref('lectureRoom')
   console.log(ref)
-  const values = await ref.once('value')
+  const snapshot = await ref.once('value')
+  const val = snapshot.val()
   const res = []
-  values.forEach(obj => res.push(obj.key))
+  for (const key in val) {
+    res.push(key)
+  }
   return res
 }
 
