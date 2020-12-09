@@ -6,18 +6,21 @@ import TimeCount from './TimeCount'
 function LectureRoom ({ lectureRoom }) {
   const [timeCounts, setTimeCounts] = useState([])
   console.log('LR', lectureRoom)
-  async function updateTimeCounts () {
-    const updated = await readTimeCounts({ lectureRoom })
-    setTimeCounts(updated)
-  }
-  useEffect(() => updateTimeCounts(), [])
+
+  useEffect(() => {
+    async function updateTimeCounts () {
+      const updated = await readTimeCounts({ lectureRoom })
+      setTimeCounts(updated)
+    }
+    updateTimeCounts()
+  }, [])
   const resultComponents = timeCounts.map(timeCount =>
         <div key={lectureRoom + timeCount}>
           <TimeCount lectureRoom={lectureRoom} timeCount={ timeCount }/>
         </div>)
   return (
     <div>
-        <p className="h2">{lectureRoom} 강의:</p>
+        <p className="h2">{lectureRoom} 강의실:</p>
           {resultComponents}
     </div>
   )
