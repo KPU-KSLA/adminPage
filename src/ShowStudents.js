@@ -38,6 +38,28 @@ function ShowStudents ({ lectureRoom, timeCount }) {
     day: now.getDay()
   }
 
+  const mappedValues = values.map(obj => {
+    const e = obj.props.children
+    const dateString = e.date
+    const date = new Date(dateString)
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const day = date.getDay()
+    const changedMin = date.getMinutes() - 30
+    date.setMinutes(changedMin)
+    const qrString = e.qr
+    const timeCount = date.getHours() - 9 || 1
+    const studentNumber = obj.studentNumber
+    return {
+      qrString,
+      year,
+      month,
+      day,
+      timeCount,
+      studentNumber
+    }
+  })
+
   const filtered = mappedValues.filter(e =>
     e.year === today.year &&
         e.month === today.month &&
