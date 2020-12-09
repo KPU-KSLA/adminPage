@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Jumbo from './Jumbo'
 
-function GetInput ({ notSignedInText, isSigned, callback }) {
-  const renderedJumbo = <Jumbo content="KPU 출석현황 페이지"></Jumbo>
+function GetInput ({ notSignedInText, jumboText, isSigned, callback }) {
+  const renderedJumbo = <Jumbo content={jumboText}></Jumbo>
   if (!isSigned) {
     return (
       <div>
@@ -80,6 +80,7 @@ function GetInput ({ notSignedInText, isSigned, callback }) {
 
 GetInput.propTypes = {
   isSigned: PropTypes.bool,
+  jumboText: PropTypes.string,
   submit: PropTypes.func,
   notSignedInText: PropTypes.string
 }
