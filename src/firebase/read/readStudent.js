@@ -3,6 +3,7 @@ import firebase from 'firebase'
 const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object
 
 async function readStudent ({ studentNumber, timeCount, lectureRoom }) {
+  console.log(studentNumber, timeCount, lectureRoom)
   const database = firebase.database()
   const ref = database
     .ref('lectureRoom')

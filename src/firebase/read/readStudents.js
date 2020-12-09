@@ -9,14 +9,19 @@ async function readStudents ({ timeCount, lectureRoom }) {
     .child('timeCount')
     .child(timeCount)
   const value = await ref.once('value')
-  const arr = []
-  value.forEach(async obj => {
-    const e = obj.props.children
-    const studentNumber = e.studentNumber
-    const result = await readStudent({ studentNumber, timeCount, lectureRoom })
-    arr.push(result)
+  const studentNumbers = []
+  value.forEach(obj => {
+    const studentNumber = obj.key
+    studentNumbers.push(studentNumber)
   })
-  return arr
+  const res = []
+  const promises = studentNumbers.map(async (studentNumber) => {
+    console.log(studentNumber)
+    const result = await readStudent({ studentNumber, timeCount, lectureRoom })
+    res.push(result)
+  })
+  await Promise.all(promises)
+  return res
 }
 
 export default readStudents
