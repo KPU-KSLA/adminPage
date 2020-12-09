@@ -16,11 +16,11 @@ function TimeCount ({ timeCount, lectureRoom }) {
   useEffect(() => updateStudents(), [])
   const resultComponents = students.map(studentNumber =>
         <div key={lectureRoom + timeCount + studentNumber}>
-          <Student studentNumber={ studentNumber } />
+          <Student studentNumber={studentNumber} lectureRoom={lectureRoom} timeCount={ timeCount } />
         </div>)
   return (
     <div>
-        <p className="h2">{timeCount} 교시:</p>
+        <p className="h2">{timeCount} 교시 학생 목록:</p>
           {resultComponents}
     </div>
   )
