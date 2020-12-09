@@ -86,7 +86,6 @@ function ShowStudents ({ lectureRoom, timeCount }) {
 }
 
 ShowStudents.propTypes = {
-  isSigned: PropTypes.bool,
-  setIsSigned: PropTypes.func,
-  uiConfig: PropTypes.uiConfig
+  lectureRoom: PropTypes.string,
+  timeCount: PropTypes.number
 }
