@@ -8,10 +8,15 @@ import readStudents from './firebase/read/readStudents'
 function ShowStudents ({ lectureRoom, timeCount }) {
   const database = firebase.database()
   const [checkedStudents, setCheckedStudents] = useState([])
+  const [everyStudents, setEveryStudents] = useState([])
+  const everyRef = database.ref('lectureRoom')
+    .child(lectureRoom)
+    .child('timeCount')
+    .child(timeCount)
+  const casesRef = database.ref('cases')
 
   useEffect(() => {
     async function getCheckedStudents () {
-      const casesRef = database.ref('cases')
       const snapShot = await casesRef.once('value')
       const snapshotObjects = []
       snapShot.forEach(e => snapshotObjects.push(<ul key={e.key}>{e.toJSON()}</ul>))
@@ -30,7 +35,17 @@ function ShowStudents ({ lectureRoom, timeCount }) {
       const result = await Promise.all(promises)
       setCheckedStudents(result)
     }
-    getCheckedStudents()
+    async function getEveryStudents () {
+      const res = await readStudents({ timeCount, lectureRoom })
+      setEveryStudents(res)
+    }
+    casesRef.on('value', () => getCheckedStudents())
+    everyRef.on('value', () => getEveryStudents())
+
+    return () => {
+      casesRef.off()
+      everyRef.off()
+    }
   })
 
   const now = new Date(Date.now())
@@ -71,15 +86,15 @@ function ShowStudents ({ lectureRoom, timeCount }) {
   )
   const noOneRegistered = '아무도 출석하지 않았습니다!'
   const noOneExists = '출석부에 등록된 학생이 아무도 없습니다!'
+
   const checkedComponents = filtered.length
     ? <div>
             {filtered.map(e => <StudentAttendance key={e.key} day={e.day} timeCount={e.timeCount} studentNumber={e.studentNumber} />)}
         </div>
     : <p className="h2 text-center">{noOneRegistered}</p>
-  const everyStudents = readStudents({ timeCount, lectureRoom })
   const everyComponents = everyStudents.length
     ? <div>
-            {everyStudents.map(e => <StudentAttendance key={e.studentNumber} day={today.day} timeCount={timeCount} studentNumber={e.studentNumber} />)}
+            {everyStudents.map(e => <StudentAttendance key={e} day={today.day} timeCount={timeCount} studentNumber={e} />)}
         </div>
     : <p className="h2 text-center">{noOneExists}</p>
   return (

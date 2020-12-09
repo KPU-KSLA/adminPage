@@ -3,12 +3,11 @@ import React from 'react'
 
 function StudentAttendance ({ key, day, timeCount, studentNumber }) {
   return (
-        <div key={key}>
-      <p key={key}>{day}일</p>
-      <p key={key}>{timeCount}교시</p>
-      <p key={key}>학번: {studentNumber}</p>
-      <p key={key}>출석</p>
-        </div>
+    <div key={key} className="card w-auto">
+      <div className="card-body text-center">
+        <p className="lead">{studentNumber}번 학생</p>
+      </div>
+    </div>
   )
 }
 
