@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 import firebase from 'firebase'
 import Content from './Content'
+import store from './redux/store'
+import signIn from './redux/action/signIn'
+import signOut from './redux/action/signOut'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDyXHxNWk-Jc7-oeY6upSFnOimzwWaAvMg',
@@ -30,26 +33,38 @@ const uiConfig = {
   ],
   callbacks: {
     // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => false
+    signInSuccessWithAuthResult: () => { store.dispatch(signIn()) }
   }
 }
 
-function Auth ({ currentPage }) {
-  const [isSignedIn, setIsSignedIn] = useState(false) // Local signed-in state.
+function Auth() {
+  const initialSignStatus = store.getState().signReducer.isSignIn
+  const [isSignedIn, setIsSignedIn] = useState(initialSignStatus) // Local signed-in state.
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-      setIsSignedIn(!!user)
+      const signed = !!user
+      if (signed) {
+        store.dispatch(signIn)
+      } else {
+        store.dispatch(signOut)
+      }
+      const signStatus = store.getState().signReducer.isSignIn
+      setIsSignedIn(signStatus)
     })
     return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
   }, [])
 
+  store.subscribe(() => {
+    const signStatus = store.getState().signReducer.isSignIn
+    setIsSignedIn(signStatus)
+  })
   return (
-    <Content isSigned={(e) => isSignedIn(e)} setIsSigned={(e) => setIsSignedIn(e)} currentPage={currentPage} uiConfig={uiConfig} />
+    <Content isSigned={isSignedIn} setIsSigned={(e) => setIsSignedIn(e)} uiConfig={uiConfig} />
   )
 }
 
 Auth.propTypes = {
-  currentPage: PropTypes.currentPage
+  currentPage: PropTypes.elementType
 }
 
 export default Auth
