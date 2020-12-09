@@ -6,21 +6,12 @@ import Content from './Content'
 import store from './redux/store'
 import signIn from './redux/action/signIn'
 import signOut from './redux/action/signOut'
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyDyXHxNWk-Jc7-oeY6upSFnOimzwWaAvMg',
-  authDomain: 'attendance-management-252a2.firebaseapp.com',
-  databaseURL: 'https://attendance-management-252a2.firebaseio.com',
-  projectId: 'attendance-management-252a2',
-  storageBucket: 'attendance-management-252a2.appspot.com',
-  messagingSenderId: '744212545817',
-  appId: '1:744212545817:web:99d562a0f35f0b0abf8588',
-  measurementId: 'G-L357SY356S'
-}
+import firebaseConfig from './firebaseConfig'
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -37,7 +28,7 @@ const uiConfig = {
   }
 }
 
-function Auth() {
+function Auth () {
   const initialSignStatus = store.getState().signReducer.isSignIn
   const [isSignedIn, setIsSignedIn] = useState(initialSignStatus) // Local signed-in state.
   useEffect(() => {
@@ -49,6 +40,7 @@ function Auth() {
         store.dispatch(signOut)
       }
       const signStatus = store.getState().signReducer.isSignIn
+      console.log(signStatus)
       setIsSignedIn(signStatus)
     })
     return () => unregisterAuthObserver() // Make sure we un-register Firebase observers when the component unmounts.
