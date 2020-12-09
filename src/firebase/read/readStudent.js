@@ -1,7 +1,5 @@
 import firebase from 'firebase'
 
-const isEmpty = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object
-
 async function readStudent ({ studentNumber, timeCount, lectureRoom }) {
   console.log(studentNumber, timeCount, lectureRoom)
   const database = firebase.database()
@@ -13,11 +11,9 @@ async function readStudent ({ studentNumber, timeCount, lectureRoom }) {
     .child(studentNumber)
   const value = await ref.once('value')
   const res = value.toJSON()
-  if (isEmpty(res)) {
-    return {}
-  }
+  console.log(res)
   return {
-    studentNumber: res.stdNum,
+    studentNumber: res,
     timeCount,
     lectureRoom
   }

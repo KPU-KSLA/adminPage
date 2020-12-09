@@ -8,7 +8,9 @@ function TimeCount ({ timeCount, lectureRoom }) {
   console.log('TC:LR', lectureRoom)
   const [students, setStudents] = useState([])
   async function updateStudents () {
-    const updated = await readStudents({ timeCount, lectureRoom })
+    const updatedObj = await readStudents({ timeCount, lectureRoom })
+    const updated = updatedObj.map(e => e.studentNumber)
+    console.log('updated', updated)
     setStudents(updated)
   }
   useEffect(() => updateStudents(), [])
