@@ -5,6 +5,7 @@ import store from './redux/store'
 import setCurrentPage from './redux/action/setCurrentPage'
 import Login from './Login'
 import signOut from './redux/action/signOut'
+import Manage from './Manage'
 
 function Navbar () {
   const initialSignStatus = store.getState().signReducer.isSignIn
@@ -32,6 +33,9 @@ function Navbar () {
                 </li>
                 <li className="nav-item active">
                     <a className="nav-link" onClick={() => setPage(Show)}>보기</a>
+                </li>
+                <li className="nav-item active">
+                    <a className="nav-link" onClick={() => setPage(Manage)}>출석부 목록 수정</a>
                 </li>
             </ul>
             <ul className="navbar-nav ml-auto">
