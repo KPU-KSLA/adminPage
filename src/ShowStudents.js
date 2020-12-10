@@ -52,21 +52,24 @@ function ShowStudents ({ lectureRoom, timeCount }) {
 
   const today = {
     year: now.getFullYear(),
-    month: now.getMonth(),
-    day: now.getDay()
+    month: now.getMonth() + 1,
+    day: now.getDate()
   }
+
+  console.log(today)
 
   const mappedCheckedStudents = checkedStudents.map(obj => {
     const e = obj.props.children
     const dateString = e.date
     const date = new Date(dateString)
+    console.log(date)
     const year = date.getFullYear()
-    const month = date.getMonth()
-    const day = date.getDay()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
     const changedMin = date.getMinutes() - 30
     date.setMinutes(changedMin)
     const qrString = e.qr
-    const timeCount = date.getHours() - 9 || 1
+    const timeCount = date.getHours() - 9 > 0 ? date.getHours() - 9 : 1
     const studentNumber = obj.studentNumber
     return {
       qrString,
@@ -78,13 +81,15 @@ function ShowStudents ({ lectureRoom, timeCount }) {
     }
   })
 
-  const filtered = mappedCheckedStudents.filter(e =>
-    e.year === today.year &&
-        e.month === today.month &&
-        e.day === today.day &&
-        e.timecount === timeCount &&
-        e.qrString === lectureRoom
-  )
+  const filtered = mappedCheckedStudents.filter(e => {
+    return e.year === today.year &&
+      e.month === today.month &&
+      e.day === today.day &&
+      e.timeCount === timeCount &&
+      e.qrString === lectureRoom
+  })
+  console.log(mappedCheckedStudents)
+  console.log(filtered)
   const noOneRegistered = '아무도 출석하지 않았습니다!'
   const noOneExists = '출석부에 등록된 학생이 아무도 없습니다!'
 
