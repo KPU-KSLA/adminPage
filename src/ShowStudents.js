@@ -82,6 +82,7 @@ function ShowStudents ({ lectureRoom, timeCount }) {
     e.year === today.year &&
         e.month === today.month &&
         e.day === today.day &&
+        e.timecount === timeCount &&
         e.qrString === lectureRoom
   )
   const noOneRegistered = '아무도 출석하지 않았습니다!'
