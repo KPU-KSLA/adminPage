@@ -45,10 +45,10 @@ function TimeCount ({ timeCount, lectureRoom }) {
       <div>
       <p className="h3">{timeCount} 교시 학생 목록:</p>
         <button className="btn btn-danger" onClick={() => confirmDeleteTimeCount()}>교시 삭제</button>
+        <StudentAdder timeCount={timeCount} lectureRoom={ lectureRoom } />
       </div>
 
       {resultComponents}
-      <StudentAdder timeCount={timeCount} lectureRoom={ lectureRoom } />
     </div>
   )
 }

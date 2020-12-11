@@ -27,8 +27,8 @@ function ManageStudents () {
       <LectureRoom lectureRoom={lectureRoom} />
     </div>)
   return <div>
-    {resultComponents}
     <LectureRoomAdder />
+    {resultComponents}
   </div>
 }
 
