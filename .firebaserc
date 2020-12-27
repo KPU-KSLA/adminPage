@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "auth-sample-page"
+    "default": "firebase-auth-sample-page"
   }
 }
