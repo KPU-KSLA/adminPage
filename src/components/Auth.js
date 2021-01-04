@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import firebase from 'firebase'
 import Content from './Content'
-import store from './redux/store'
-import signIn from './redux/action/signIn'
-import signOut from './redux/action/signOut'
+import store from '../redux/store'
+import signIn from '../redux/action/signIn'
+import signOut from '../redux/action/signOut'
 import firebaseConfig from './firebaseConfig'
 
 // Initialize Firebase

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import IndexPage from './IndexPage'
 import Show from './Show'
-import store from './redux/store'
-import setCurrentPage from './redux/action/setCurrentPage'
+import store from '../redux/store'
+import setCurrentPage from '../redux/action/setCurrentPage'
 import Login from './Login'
-import signOut from './redux/action/signOut'
+import signOut from '../redux/action/signOut'
 import Manage from './Manage'
 
 function Navbar () {

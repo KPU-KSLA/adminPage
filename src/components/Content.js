@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { createElement, useState } from 'react'
-import store from './redux/store'
+import store from '../redux/store'
 
 function Content ({ isSigned, setIsSigned, uiConfig }) {
   const initialPage = store.getState().pageReducer.page

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import deleteStudent from './firebase/delete/deleteStudent'
+import deleteStudent from '../firebase/delete/deleteStudent'
 
 function Student ({ studentNumber, timeCount, lectureRoom }) {
   const confirmDeleteStudent = () => {

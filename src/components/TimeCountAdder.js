@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import createTimeCount from './firebase/create/createTimeCount'
+import createTimeCount from '../firebase/create/createTimeCount'
 import PropTypes from 'prop-types'
 
 function TimeCountAdder ({ lectureRoom }) {

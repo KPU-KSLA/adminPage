@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import createStudent from './firebase/create/createStudent'
+import createStudent from '../firebase/create/createStudent'
 import PropTypes from 'prop-types'
 
 function StudentAdder ({ lectureRoom, timeCount }) {

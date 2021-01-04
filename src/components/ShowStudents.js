@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import firebase from 'firebase'
 import StudentAttendance from './StudentAttendance'
 import Jumbo from './Jumbo'
-import readStudents from './firebase/read/readStudents'
+import readStudents from '../firebase/read/readStudents'
 
 function ShowStudents ({ lectureRoom, timeCount }) {
   const database = firebase.database()

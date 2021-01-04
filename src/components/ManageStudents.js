@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import readLectureRooms from './firebase/read/readLectureRooms'
+import readLectureRooms from '../firebase/read/readLectureRooms'
 import LectureRoom from './LectureRoom'
 import LectureRoomAdder from './LectureRoomAdder'
 import firebase from 'firebase'

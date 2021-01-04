@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import readTimeCounts from './firebase/read/readTimeCounts'
+import readTimeCounts from '../firebase/read/readTimeCounts'
 import TimeCount from './TimeCount'
 import TimeCountAdder from './TimeCountAdder'
 import firebase from 'firebase'
@@ -31,7 +31,7 @@ function LectureRoom ({ lectureRoom }) {
         </div>)
   return (
     <div>
-        <p className="h2">{lectureRoom} 강의실:</p>
+      <p className="h2">{lectureRoom} 강의실:</p>
       {resultComponents}
       <TimeCountAdder lectureRoom={ lectureRoom } />
     </div>
