@@ -1,12 +1,12 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyDyXHxNWk-Jc7-oeY6upSFnOimzwWaAvMg',
-  authDomain: 'attendance-management-252a2.firebaseapp.com',
-  databaseURL: 'https://attendance-management-252a2.firebaseio.com',
-  projectId: 'attendance-management-252a2',
-  storageBucket: 'attendance-management-252a2.appspot.com',
-  messagingSenderId: '744212545817',
-  appId: '1:744212545817:web:99d562a0f35f0b0abf8588',
-  measurementId: 'G-L357SY356S'
+  apiKey: 'AIzaSyBWqJzzQnNENKkOVpsOhWlITGv-Um9Y_Hc',
+  authDomain: 'fir-auth-sample-page.firebaseapp.com',
+  projectId: 'fir-auth-sample-page',
+  storageBucket: 'fir-auth-sample-page.appspot.com',
+  messagingSenderId: '973196040928',
+  appId: '1:973196040928:web:b66fd30bd80805bcc94e85',
+  measurementId: 'G-BLQ12S759K'
 }
 
 export default firebaseConfig
