@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import readStudents from './firebase/read/readStudents'
+import readStudents from '../firebase/read/readStudents'
 import Student from './Student'
 import StudentAdder from './StudentAdder'
 import firebase from 'firebase'
-import deleteTimeCount from './firebase/delete/deleteTimeCount'
+import deleteTimeCount from '../firebase/delete/deleteTimeCount'
 
 function TimeCount ({ timeCount, lectureRoom }) {
   console.log('TC', timeCount)

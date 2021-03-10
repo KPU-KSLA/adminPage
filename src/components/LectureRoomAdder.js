@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import createLectureRoom from './firebase/create/createLectureRoom'
+import createLectureRoom from '../firebase/create/createLectureRoom'
 
 function LectureRoomAdder () {
   const [lectureRoom, setLectureRoom] = useState('')
