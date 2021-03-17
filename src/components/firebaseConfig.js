@@ -1,12 +1,13 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyBWqJzzQnNENKkOVpsOhWlITGv-Um9Y_Hc',
-  authDomain: 'fir-auth-sample-page.firebaseapp.com',
-  projectId: 'fir-auth-sample-page',
-  storageBucket: 'fir-auth-sample-page.appspot.com',
-  messagingSenderId: '973196040928',
-  appId: '1:973196040928:web:b66fd30bd80805bcc94e85',
-  measurementId: 'G-BLQ12S759K'
+  apiKey: 'AIzaSyDE9mQxKnX7rL7eqkLm3QxnvevZKuz361w',
+  authDomain: 'attman-4f136.firebaseapp.com',
+  databaseURL: 'https://attman-4f136.firebaseio.com',
+  projectId: 'attman-4f136',
+  storageBucket: 'attman-4f136.appspot.com',
+  messagingSenderId: '616479171708',
+  appId: '1:616479171708:web:bd264d3aa6c7447f1895f9',
+  measurementId: 'G-V6RSF2B5RR'
 }
 
 export default firebaseConfig
